@@ -1,7 +1,12 @@
 import Course from '../models/Course.js';
 
-export const getCourse = (req, res) => {
-  return res.status(200).json({ message: 'getCourse' });
+export const getCourse = async (req, res) => {
+  try {
+    const courses = await Course.find();
+    res.status(200).json(courses);
+  } catch (err) {
+    res.status(400).json({ message: `${err}` });
+  }
 };
 
 export const addCourse = async (req, res) => {
