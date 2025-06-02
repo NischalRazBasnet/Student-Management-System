@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import studentRoutes from './routes/studentRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import mongoose from 'mongoose';
+import fileUpload from 'express-fileupload';
 
 //EXPRESS
 const app = express();
@@ -10,6 +11,12 @@ const app = express();
 //MIDDLEWARE
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(
+  fileUpload({
+    limits: { fileSize: 5 * 1024 * 1024 },
+    abortOnLimit: true,
+  })
+);
 
 //DATABASE CONNECTION
 mongoose
@@ -26,7 +33,7 @@ mongoose
   });
 
 app.get('/', (req, res) => {
-  res.status(200).json({ message: 'WELCOME TO BACKEND' });
+  res.status(200).json({ message: 'STUDENT MANAGEMENT SYSTEM' });
 });
 
 app.use(studentRoutes);

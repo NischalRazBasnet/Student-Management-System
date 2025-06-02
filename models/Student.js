@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const shifts = ['Morning', 'Day', 'Evening'];
+export const shifts = ['Morning', 'Day', 'Evening'];
 
 const studentSchema = new mongoose.Schema(
   {
