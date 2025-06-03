@@ -17,7 +17,7 @@ app.use(
     abortOnLimit: true,
   })
 );
-
+app.use(express.static('uploads'));
 //DATABASE CONNECTION
 mongoose
   .connect(

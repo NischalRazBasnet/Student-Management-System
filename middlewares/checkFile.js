@@ -1,27 +1,30 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const supportedTypes = [
   'image/png',
   'image/jpg',
   'image/jpeg',
-  'image/webp',
   'image/gif',
+  'image/webp',
 ];
 
 export const fileCheck = (req, res, next) => {
   const file = req.files?.image;
+
   if (file) {
     if (supportedTypes.includes(file.mimetype)) {
-      file.mv(`./uploads/${file.name}`, (err) => {
+      const imageFile = `/${uuidv4()}-${file.name}`;
+      file.mv(`./uploads${imageFile}`, (err) => {
         if (err) return res.status(400).json({ message: `${err}` });
+        req.image = imageFile;
+        next();
       });
-      next();
     } else {
       return res
         .status(400)
-        .json({ message: 'Please Provide Valid File Format' });
+        .json({ message: 'please provide valid image file' });
     }
-
-    next();
   } else {
-    return res.status(400).json({ message: 'Please Provide Image File' });
+    return res.status(400).json({ message: 'please provide image file' });
   }
 };

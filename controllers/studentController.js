@@ -65,19 +65,20 @@ export const getStudents = async (req, res) => {
 };
 
 export const addStudent = async (req, res) => {
-  // const { image } = req.body;
+  const { firstName, lastName, age, address, email, phoneNo, course, shift } =
+    req.body;
   try {
-    // await Student.create({
-    //   firstName,
-    //   lastName,
-    //   age,
-    //   image,
-    //   address,
-    //   email,
-    //   phoneNo,
-    //   course,
-    //   shift,
-    // });
+    await Student.create({
+      firstName,
+      lastName,
+      age,
+      image: req.image,
+      address,
+      email,
+      phoneNo,
+      course,
+      shift,
+    });
     return res.status(200).json({ message: 'Student Added Successfully' });
   } catch (err) {
     return res.status(400).json({ message: `${err}` });
