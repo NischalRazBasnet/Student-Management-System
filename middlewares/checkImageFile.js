@@ -8,7 +8,7 @@ const supportedTypes = [
   'image/webp',
 ];
 
-export const fileCheck = (req, res, next) => {
+export const CheckImageFile = (req, res, next) => {
   const file = req.files?.image;
 
   if (file) {

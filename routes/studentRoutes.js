@@ -7,27 +7,22 @@ import {
   deleteStudent,
 } from '../controllers/studentController.js';
 import { notAllowed } from '../utils/notAllowed.js';
-import { fileCheck } from '../middlewares/checkFile.js';
+import { CheckImageFile } from '../middlewares/checkImageFile.js';
+import { findStudentID } from '../middlewares/checkById.js';
 
 const router = Router();
 
 router
   .route('/students')
   .get(getStudents)
-  .post(fileCheck, addStudent)
+  .post(CheckImageFile, addStudent)
   .all(notAllowed);
 
 router
   .route('/students/:id')
-  .get(getStudent)
-  .patch(updateStudent)
-  .delete(deleteStudent)
+  .get(findStudentID, getStudent)
+  .patch(findStudentID, CheckImageFile, updateStudent)
+  .delete(findStudentID, deleteStudent)
   .all(notAllowed);
-
-router
-  .route('/students/:id')
-  .get(getStudent)
-  .patch(updateStudent)
-  .delete(deleteStudent);
 
 export default router;

@@ -1,6 +1,8 @@
-import Student, { shifts } from '../models/Student.js';
+import Student from '../models/Student.js';
 import Course from '../models/Course.js';
+import fs from 'fs';
 
+//GET STUDENTS
 export const getStudents = async (req, res) => {
   try {
     const queryObject = { ...req.query };
@@ -64,6 +66,7 @@ export const getStudents = async (req, res) => {
   }
 };
 
+//ADD STUDENT
 export const addStudent = async (req, res) => {
   const { firstName, lastName, age, address, email, phoneNo, course, shift } =
     req.body;
@@ -81,17 +84,41 @@ export const addStudent = async (req, res) => {
     });
     return res.status(200).json({ message: 'Student Added Successfully' });
   } catch (err) {
+    fs.unlink(`./uploads${req.image}`, (imageErr) => {
+      return res.status(400).json({ message: `${err}` });
+    });
+  }
+};
+export const getStudent = (req, res) => {
+  try {
+    return res.status(200).json(req.student);
+  } catch (err) {
     return res.status(400).json({ message: `${err}` });
   }
 };
-export const getStudent = async (req, res) => {
-  return res.status(200).json({ message: 'getStudent' });
-};
 
+//UPDATE STUDENT DETAILS
 export const updateStudent = async (req, res) => {
   return res.status(200).json({ message: 'updateStudent' });
 };
 
+//DELETE STUDENT
 export const deleteStudent = async (req, res) => {
-  return res.status(200).json({ message: 'removeStudent' });
+  const student = req.student;
+  try {
+    if (student.image) {
+      fs.unlink(`./uploads${student.image}`, async (imageErr) => {
+        if (imageErr && imageErr.code !== 'ENOENT') {
+          return res.status(400).json({ message: `${imageErr}` });
+        }
+        await Student.findByIdAndDelete(student._id);
+        return res.status(200).json({ message: 'Student Removed Sucessfully' });
+      });
+    } else {
+      await Student.findByIdAndDelete(student._id);
+      return res.status(200).json({ message: 'Student Removed Sucessfully' });
+    }
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+  }
 };
