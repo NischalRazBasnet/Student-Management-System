@@ -1,21 +1,31 @@
 import { Router } from 'express';
-import {
-  addCourse,
-  getCourse,
-  getCourses,
-} from '../controllers/courseController.js';
 import { notAllowed } from '../utils/notAllowed.js';
 import { findCourseID } from '../middlewares/checkById.js';
+import {
+  addCourse,
+  deleteCourse,
+  getCourse,
+  getCourses,
+  updateCourse,
+} from '../controllers/courseController.js';
+import {
+  courseValidationSchema,
+  validates,
+} from '../utils/validationSchemas.js';
 
 const router = Router();
 
-router.route('/courses').get(getCourses).post(addCourse).all(notAllowed);
+router
+  .route('/')
+  .get(getCourses)
+  .post(validates.body(courseValidationSchema), addCourse)
+  .all(notAllowed);
 
 router
-  .route('/courses/:id')
+  .route('/:id')
   .get(findCourseID, getCourse)
-  .patch(findCourseID, addCourse)
-  .delete(findCourseID, addCourse)
+  .patch(findCourseID, updateCourse)
+  .delete(findCourseID, deleteCourse)
   .all(notAllowed);
 
 export default router;

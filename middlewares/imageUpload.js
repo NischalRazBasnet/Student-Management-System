@@ -8,7 +8,7 @@ const supportedTypes = [
   'image/webp',
 ];
 
-export const CheckImageFile = (req, res, next) => {
+export const handleImageUpload = (req, res, next) => {
   const file = req.files?.image;
 
   if (file) {
@@ -26,5 +26,25 @@ export const CheckImageFile = (req, res, next) => {
     }
   } else {
     return res.status(400).json({ message: 'please provide image file' });
+  }
+};
+export const handleOptionalImageUpload = (req, res, next) => {
+  const file = req.files?.image;
+
+  if (file) {
+    if (supportedTypes.includes(file.mimetype)) {
+      const imageFile = `/${uuidv4()}-${file.name}`;
+      file.mv(`./uploads${imageFile}`, (err) => {
+        if (err) return res.status(400).json({ message: `${err}` });
+        req.image = imageFile;
+        next();
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ message: 'please provide valid image file' });
+    }
+  } else {
+    next();
   }
 };

@@ -66,6 +66,15 @@ export const getStudents = async (req, res) => {
   }
 };
 
+//GET STUDENT BY ID
+export const getStudent = (req, res) => {
+  try {
+    return res.status(200).json(req.student);
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+  }
+};
+
 //ADD STUDENT
 export const addStudent = async (req, res) => {
   const { firstName, lastName, age, address, email, phoneNo, course, shift } =
@@ -89,17 +98,35 @@ export const addStudent = async (req, res) => {
     });
   }
 };
-export const getStudent = (req, res) => {
-  try {
-    return res.status(200).json(req.student);
-  } catch (err) {
-    return res.status(400).json({ message: `${err}` });
-  }
-};
 
 //UPDATE STUDENT DETAILS
 export const updateStudent = async (req, res) => {
-  return res.status(200).json({ message: 'updateStudent' });
+  const student = req.student;
+  const { firstName, lastName, age, address, email, phoneNo, course, shift } =
+    req.body;
+  try {
+    student.firstName = firstName || student.firstName;
+    student.lastName = lastName || student.lastName;
+    student.age = age || student.age;
+    student.address = address || student.address;
+    student.email = email || student.email;
+    student.phoneNo = phoneNo || student.phoneNo;
+    student.course = course || student.course;
+    student.shift = shift || student.shift;
+    if (req.image) {
+      fs.unlink(`./uploads${student.image}`, async (err) => {
+        student.image = req.image;
+        await student.save();
+      });
+    } else {
+      await student.save();
+    }
+    return res.status(200).json({ message: 'Student Updated Successfully' });
+  } catch (err) {
+    fs.unlink(`./uploads${req.image}`, (imageErr) => {
+      return res.status(400).json({ message: `${err}` });
+    });
+  }
 };
 
 //DELETE STUDENT

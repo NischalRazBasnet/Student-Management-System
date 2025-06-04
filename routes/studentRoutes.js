@@ -6,22 +6,28 @@ import {
   updateStudent,
   deleteStudent,
 } from '../controllers/studentController.js';
+import {
+  handleImageUpload,
+  handleOptionalImageUpload,
+} from '../middlewares/imageUpload.js';
+import {
+  studentValidationSchema,
+  validates,
+} from '../utils/validationSchemas.js';
 import { notAllowed } from '../utils/notAllowed.js';
-import { CheckImageFile } from '../middlewares/checkImageFile.js';
 import { findStudentID } from '../middlewares/checkById.js';
 
 const router = Router();
-
 router
-  .route('/students')
+  .route('/')
   .get(getStudents)
-  .post(CheckImageFile, addStudent)
+  .post(validates.body(studentValidationSchema), handleImageUpload, addStudent)
   .all(notAllowed);
 
 router
-  .route('/students/:id')
+  .route('/:id')
   .get(findStudentID, getStudent)
-  .patch(findStudentID, CheckImageFile, updateStudent)
+  .patch(findStudentID, handleOptionalImageUpload, updateStudent)
   .delete(findStudentID, deleteStudent)
   .all(notAllowed);
 

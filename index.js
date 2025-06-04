@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import studentRoutes from './routes/studentRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 import mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
 
@@ -36,5 +37,6 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'STUDENT MANAGEMENT SYSTEM' });
 });
 
-app.use(studentRoutes);
-app.use(courseRoutes);
+app.use('/api/students', studentRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/admin', adminRoutes);
