@@ -16,8 +16,10 @@ import {
 } from '../utils/validationSchemas.js';
 import { notAllowed } from '../utils/notAllowed.js';
 import { findStudentID } from '../middlewares/checkById.js';
+import { verifyToken } from '../middlewares/verifyToken.js';
 
 const router = Router();
+router.use(verifyToken);
 router
   .route('/')
   .get(getStudents)

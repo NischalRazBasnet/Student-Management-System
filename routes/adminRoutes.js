@@ -11,6 +11,7 @@ import {
   adminSetupValidation,
   validates,
 } from '../utils/validationSchemas.js';
+import { verifyToken } from '../middlewares/verifyToken.js';
 
 const router = Router();
 
@@ -26,8 +27,8 @@ router
 
 router
   .route('/profile')
-  .get(getAdminProfile)
-  .patch(updateAdminProfile)
+  .get(verifyToken, getAdminProfile)
+  .patch(verifyToken, updateAdminProfile)
   .all(notAllowed);
 
 export default router;

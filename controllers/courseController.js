@@ -23,6 +23,11 @@ export const getCourse = async (req, res) => {
 export const addCourse = async (req, res) => {
   const { title, description, duration, level } = req.body;
   try {
+    const existingCourse = await Course.findOne({
+      title: new RegExp(`^${title}$`, 'i'),
+    });
+    if (existingCourse)
+      return res.status(400).json({ message: 'Course already exists' });
     await Course.create({
       title,
       description,

@@ -12,8 +12,10 @@ import {
   courseValidationSchema,
   validates,
 } from '../utils/validationSchemas.js';
+import { verifyToken } from '../middlewares/verifyToken.js';
 
 const router = Router();
+router.use(verifyToken);
 
 router
   .route('/')

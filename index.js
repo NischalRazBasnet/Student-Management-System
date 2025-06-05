@@ -1,10 +1,14 @@
 import express from 'express';
 import morgan from 'morgan';
+import mongoose from 'mongoose';
+import fileUpload from 'express-fileupload';
+import dotenv from 'dotenv';
+
 import studentRoutes from './routes/studentRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
-import mongoose from 'mongoose';
-import fileUpload from 'express-fileupload';
+
+dotenv.config();
 
 //EXPRESS
 const app = express();
@@ -21,12 +25,12 @@ app.use(
 app.use(express.static('uploads'));
 //DATABASE CONNECTION
 mongoose
-  .connect(
-    'mongodb+srv://nischalbasnet7848:Password@cluster0.pzmrcz4.mongodb.net/StudentManagementSystem'
-  )
-  .then((val) => {
-    app.listen(5000, () => {
-      console.log('database connected and server is listening');
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log(
+        'Database connected. Server running on port ' + process.env.PORT
+      );
     });
   })
   .catch((err) => {
