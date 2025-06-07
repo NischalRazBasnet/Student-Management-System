@@ -1,44 +1,39 @@
-import Header from './components/Header';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import RootLayout from './components/RootLayout';
+import Sample from './Sample';
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('darkMode') === 'true';
-  });
+  // const [darkMode, setDarkMode] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem('darkMode', darkMode);
-  }, [darkMode]);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+  // const toggleDarkMode = () => {
+  //   setDarkMode(!darkMode);
+  // };
+
+  const toggleSideBar = () => {
+    setIsSideBarOpen(!isSideBarOpen);
   };
 
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <RootLayout toggleSideBar={toggleSideBar} />,
+      children: [
+        {
+          index: true,
+          element: <Sample />,
+        },
+      ],
+    },
+  ]);
+
   return (
-    <div className={darkMode ? 'dark' : ''}>
-      <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+    <div className={`max-w-[1750px] mx-auto`}>
+      <RouterProvider router={router} />
     </div>
   );
 };
+
 export default App;
-
-//   const router = createBrowserRouter([
-//     {
-//       path: '/',
-//       element: (
-//         <RootLayout darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-//       ),
-//       children: [
-//         {
-//           index: true,
-//           element: <Sample />,
-//         },
-//       ],
-//     },
-//   ]);
-
-//   return (
-//     <div className={`${darkMode && 'dark'}max-w-[1750px] mx-auto`}>
-//       <RouterProvider router={router} />
-//     </div>
-//   );

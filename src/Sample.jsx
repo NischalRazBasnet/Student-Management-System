@@ -1,6 +1,6 @@
 import { Button } from '@material-tailwind/react';
 
-export default function Sample() {
+const Sample = () => {
   return (
     <div>
       <Button>Click ME</Button>
@@ -10,4 +10,5 @@ export default function Sample() {
       <p>This is a paragraph demo for the font</p>
     </div>
   );
-}
+};
+export default Sample;

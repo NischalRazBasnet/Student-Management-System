@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 
-export default function RootLayout({ darkMode, toggleDarkMode }) {
+export default function RootLayout({ toggleSideBar }) {
   return (
     <div>
-      <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+      <Header toggleSideBar={toggleSideBar} />
       <main>
         <Outlet />
       </main>
