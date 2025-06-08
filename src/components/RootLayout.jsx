@@ -1,13 +1,15 @@
-import { Outlet } from 'react-router-dom';
 import Header from './Header';
+import { Outlet } from 'react-router';
 
-export default function RootLayout({ toggleSideBar }) {
+const RootLayout = () => {
   return (
     <div>
-      <Header toggleSideBar={toggleSideBar} />
+      <Header />
       <main>
         <Outlet />
       </main>
     </div>
   );
-}
+};
+
+export default RootLayout;

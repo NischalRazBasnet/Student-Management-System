@@ -1,39 +1,42 @@
-import { useState } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from 'react-router-dom';
 import RootLayout from './components/RootLayout';
-import Sample from './Sample';
+import DashboardLayout from './dashboard/DashboardLayout';
+import DashboardPage from './features/DashboardPage';
+import StudentsPage from './features/StudentsPage';
+import CoursesPage from './features/CoursesPage';
 
-const App = () => {
-  // const [darkMode, setDarkMode] = useState(false);
-
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-
-  // const toggleDarkMode = () => {
-  //   setDarkMode(!darkMode);
-  // };
-
-  const toggleSideBar = () => {
-    setIsSideBarOpen(!isSideBarOpen);
-  };
-
+function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <RootLayout toggleSideBar={toggleSideBar} />,
+      element: <RootLayout />,
       children: [
         {
+          path: 'dashboard',
+          element: <DashboardLayout />,
+          children: [
+            { index: true, element: <DashboardPage /> },
+            { path: 'students', element: <StudentsPage /> },
+            { path: 'courses', element: <CoursesPage /> },
+          ],
+        },
+        {
           index: true,
-          element: <Sample />,
+          element: <Navigate to='/dashboard' replace />,
         },
       ],
     },
   ]);
 
   return (
-    <div className={`max-w-[1750px] mx-auto`}>
+    <div className='min-h-screen bg-base-200' data-theme='dark'>
       <RouterProvider router={router} />
     </div>
   );
-};
+}
 
 export default App;

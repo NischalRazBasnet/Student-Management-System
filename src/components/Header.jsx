@@ -1,36 +1,27 @@
-import { Button } from '@material-tailwind/react';
 import { HiOutlineMenuAlt2 } from 'react-icons/hi';
-import { FaSun, FaMoon, FaUserGraduate } from 'react-icons/fa';
+import { FaUserGraduate } from 'react-icons/fa';
 
-const Header = ({ darkMode, toggleDarkMode }) => {
+const Header = ({ toggleDrawer }) => {
   return (
-    <nav className='fixed top-0 z-10 w-full max-w-[1750px] mx-auto h-fit bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700'>
-      <div className='px-3 py-3 lg:px-5 lg:pl-3'>
-        <div className='flex items-center justify-between'>
-          <div className='flex items-center justify-start rtl:justify-end'>
-            <Button
-              className='inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
-              variant='text'
-            >
-              <HiOutlineMenuAlt2 className='text-2xl dark:text-white' />
-            </Button>
-            <a href='/' className='flex ms-2.5 md:me-24'>
-              <FaUserGraduate className='text-lg sm:text-2xl h-8 me-2.5 text-purple-500' />
-              <span className='self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white'>
-                ENROLLIX
-              </span>
-            </a>
-          </div>
-          <Button
-            className='dark:bg-slate-50 dark:text-slate-700 p-1.5 text-xl rounded-full'
-            variant='text'
-            onClick={toggleDarkMode}
-          >
-            {darkMode ? <FaSun /> : <FaMoon />}
-          </Button>
-        </div>
+    <div className='navbar bg-base-100 shadow-xl sticky top-0 z-30'>
+      <div className='flex-none '>
+        <button
+          className='inline-flex items-center p-2 text-sm text-gray-500 rounded-lg focus:outline-0 focus:ring-3 focus:ring-gray-700  lg:hidden'
+          onClick={toggleDrawer}
+        >
+          <HiOutlineMenuAlt2 className='w-6 h-6' />
+        </button>
       </div>
-    </nav>
+      <div>
+        <a
+          href='/'
+          className='flex items-center ms-2.5 sm:ms-5 gap-3.5 normal-case text-2xl font-bold'
+        >
+          <FaUserGraduate className='w-6 h-6 text-primary ' />
+          <span className='max-sm:hidden'>EnrollX</span>
+        </a>
+      </div>
+    </div>
   );
 };
 
