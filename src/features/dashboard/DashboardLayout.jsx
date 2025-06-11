@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Drawer from '../components/Drawer';
+import Drawer from '../../components/Drawer';
 import { Outlet } from 'react-router';
 
 const DashboardLayout = () => {

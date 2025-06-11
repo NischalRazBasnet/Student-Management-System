@@ -4,10 +4,23 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import RootLayout from './components/RootLayout';
-import DashboardLayout from './dashboard/DashboardLayout';
-import DashboardPage from './features/DashboardPage';
-import StudentsPage from './features/StudentsPage';
-import CoursesPage from './features/CoursesPage';
+import DashboardLayout from './features/dashboard/DashboardLayout';
+import DashboardPage from './features/dashboard/DashboardPage';
+import StudentsPage from './features/student/StudentsPage';
+import CoursesPage from './features/course/CoursesPage';
+import Login from './features/authentication/Login';
+import Setup from './features/authentication/Setup';
+
+// const checkSession = () => {
+//   return localStorage.getItem('admin') !== null;
+// };
+
+// const ProtectedRoute = ()=>{
+//   if(!checkSession()){
+//     return <Navigate to='/login' replace />
+//   }
+//   return <Outlet />
+// }
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +41,9 @@ function App() {
           index: true,
           element: <Navigate to='/dashboard' replace />,
         },
+
+        { path: 'login', element: <Login /> },
+        { path: 'setup', element: <Setup /> },
       ],
     },
   ]);
