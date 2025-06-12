@@ -25,7 +25,7 @@ const Drawer = ({ toggleDrawer }) => {
         onClick={toggleDrawer}
       ></label>
 
-      <ul className='menu p-4 w-60 min-h-full bg-base-100 text-base-content'>
+      <ul className='menu p-4 w-60 h-full  bg-base-100 text-base-content overflow-clip'>
         {menuItems.map((item) => (
           <li key={item.label} onClick={toggleDrawer}>
             <NavItem to={item.href}>

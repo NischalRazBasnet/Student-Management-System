@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Drawer from '../../components/Drawer';
 import { Outlet } from 'react-router';
+import Pagination from '../../components/Pagination';
 
 const DashboardLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,16 +10,20 @@ const DashboardLayout = () => {
   return (
     <div className={`drawer ${isOpen ? 'drawer-open' : ''} lg:drawer-open`}>
       <input
-        id='my-drawer'
+        id='dashboard-drawer'
         type='checkbox'
         className='drawer-toggle'
         checked={isOpen}
         onChange={toggleDrawer}
       />
+
+      <Drawer toggleDrawer={toggleDrawer} />
       <div className='drawer-content'>
         <Outlet />
+        <div className=' place-items-center'>
+          <Pagination />
+        </div>
       </div>
-      <Drawer onToggle={toggleDrawer} isOpen={isOpen} />
     </div>
   );
 };

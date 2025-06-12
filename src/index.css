@@ -8,8 +8,23 @@
   font-family: 'Quicksand', sans-serif;
 }
 
+:root {
+  scrollbar-color: color-mix(in oklch, currentColor 50%, #1d232a) #191e24;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+:root:has(
+    .modal-open,
+    .modal[open],
+    .modal:target,
+    .modal-toggle:checked,
+    .drawer:not([class*='drawer-open']) > .drawer-toggle:checked
+  ) {
+  @apply overflow-hidden;
+}
+
 body {
-  margin: 0;
   padding: 0;
   overflow-x: hidden;
 }

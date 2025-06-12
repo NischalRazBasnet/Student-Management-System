@@ -7,11 +7,13 @@ import {
   Button,
   Spinner,
 } from '@material-tailwind/react';
-import { useGetStudentsQuery } from './StudentApi';
+import { useGetStudentsQuery } from './studentApi';
 import { baseUrl } from '../../app/MainApi';
+import { useNavigate } from 'react-router';
 
 export function StudentList() {
   const { isLoading, error, data } = useGetStudentsQuery();
+  const nav = useNavigate();
 
   if (isLoading) {
     return (
@@ -32,16 +34,16 @@ export function StudentList() {
     );
   }
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+    <div className='px-15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10'>
       {console.log(data)}
       {data &&
         data.map(({ _id, firstName, lastName, image, course, shift }) => {
           return (
             <Card
               key={_id}
-              className=' w-90 card bg-base-100 shadow-lg card-shadow'
+              className=' w-59 card bg-base-100 shadow-lg card-shadow'
             >
-              <CardHeader className=' relative h-70 m-3 overflow-hidden rounded-xl'>
+              <CardHeader className=' relative h-28 m-3 overflow-hidden rounded-xl'>
                 <img
                   className=' w-full h-full object-cover'
                   src={`${baseUrl}${image}`}
@@ -73,7 +75,10 @@ export function StudentList() {
               </CardBody>
 
               <CardFooter className='flex px-4 pb-6 pt-0 mt-2 justify-end'>
-                <Button className='rounded-md bg-slate-800 py-2 px-4 border border-slate-700 text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:scale-102 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'>
+                <Button
+                  onClick={() => nav(`/student/${_id}`)}
+                  className='rounded-md bg-slate-800 py-2 px-4 border border-slate-700 text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:scale-102 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
+                >
                   more
                 </Button>
               </CardFooter>

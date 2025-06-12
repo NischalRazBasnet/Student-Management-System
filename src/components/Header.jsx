@@ -1,6 +1,5 @@
 import { HiOutlineMenuAlt2 } from 'react-icons/hi';
 import { FaUserGraduate } from 'react-icons/fa';
-import { Button } from '@material-tailwind/react';
 import AdminProfile from './AdminProfile';
 import { useSelector } from 'react-redux';
 

@@ -1,5 +1,6 @@
 import Header from './Header';
 import { Outlet } from 'react-router';
+import Pagination from './Pagination';
 
 const RootLayout = () => {
   return (

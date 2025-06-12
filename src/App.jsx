@@ -10,6 +10,8 @@ import StudentsPage from './features/student/StudentsPage';
 import CoursesPage from './features/course/CoursesPage';
 import Login from './features/authentication/Login';
 import Setup from './features/authentication/Setup';
+import Student from './features/student/Student';
+import Course from './features/course/Course';
 
 // const checkSession = () => {
 //   return localStorage.getItem('admin') !== null;
@@ -44,12 +46,17 @@ function App() {
 
         { path: 'login', element: <Login /> },
         { path: 'setup', element: <Setup /> },
+        { path: 'student/:id', element: <Student /> },
+        { path: 'course/:id', element: <Course /> },
       ],
     },
   ]);
 
   return (
-    <div className='min-h-screen bg-base-200' data-theme='dark'>
+    <div
+      className='max-w-[1750px]  max-h-full bg-base-200 mx-auto'
+      data-theme='dark'
+    >
       <RouterProvider router={router} />
     </div>
   );
