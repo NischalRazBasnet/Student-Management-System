@@ -1,6 +1,7 @@
 import Student from '../models/Student.js';
 import Course from '../models/Course.js';
 import fs from 'fs';
+import { queryObjects } from 'v8';
 
 //GET STUDENTS
 export const getStudents = async (req, res) => {
@@ -55,10 +56,7 @@ export const getStudents = async (req, res) => {
     const limit = Number(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
-    const students = await query
-      .skip(skip)
-      .limit(limit)
-      .select('-createdAt -updatedAt');
+    const students = await query.skip(skip).limit(limit).select(' -updatedAt');
 
     return res.status(200).json(students);
   } catch (err) {
@@ -67,9 +65,14 @@ export const getStudents = async (req, res) => {
 };
 
 //GET STUDENT BY ID
-export const getStudent = (req, res) => {
+export const getStudent = async (req, res) => {
   try {
-    return res.status(200).json(req.student);
+    const _id = req.params.id;
+    let query = Student.findById(_id).populate('course');
+    const student = await query;
+
+    if (!student) return res.status(404).json({ message: 'Student Not Found' });
+    return res.status(200).json(student);
   } catch (err) {
     return res.status(400).json({ message: `${err}` });
   }

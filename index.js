@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import studentRoutes from './routes/studentRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
@@ -14,6 +15,7 @@ dotenv.config();
 const app = express();
 
 //MIDDLEWARE
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(
