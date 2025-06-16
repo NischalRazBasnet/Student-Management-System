@@ -19,10 +19,9 @@ const Login = () => {
       <div className='w-full max-w-md bg-gray-900 rounded-xl card-shadow overflow-hidden'>
         <div className='p-6 sm:p-8'>
           <div className='text-center mb-6 sm:mb-8'>
-            <Avatar
-              src='../public/sms-favicon.svg'
-              className='w-16 h-16 sm:w-20 sm:h-20 mb-3 mx-auto'
-            />
+            <div className='mx-auto bg-primary rounded-full w-25 h-25 mb-4 pt-3'>
+              <FaGraduationCap className='text-7xl text-primary-content flex place-self-center' />
+            </div>
             <h1 className='text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2'>
               EnrollX
             </h1>

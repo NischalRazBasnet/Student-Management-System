@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Formik } from 'formik';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaGraduationCap } from 'react-icons/fa';
 import { Avatar, Input } from '@material-tailwind/react';
 import { useAdminSignUPMutation } from './authApi';
 import toast from 'react-hot-toast';
@@ -16,10 +17,9 @@ const Setup = () => {
       <div className='w-full max-w-md bg-gray-900 rounded-xl card-shadow overflow-hidden'>
         <div className='p-8'>
           <div className='text-center mb-8'>
-            <Avatar
-              src='../public/sms-favicon.svg'
-              className='w-20 h-20 mb-2.5'
-            />
+            <div className='mx-auto bg-primary rounded-full w-25 h-25 mb-4 pt-3'>
+              <FaGraduationCap className='text-7xl text-primary-content flex place-self-center' />
+            </div>
             <h1 className='text-3xl font-bold text-primary mb-2'>
               EnrollX Setup
             </h1>
