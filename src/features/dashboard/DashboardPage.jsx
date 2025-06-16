@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
-import { useGetStudentsQuery } from '../student/studentApi';
 import { useGetCoursesQuery } from '../course/courseApi';
 import DashboardTable from './DashboardTable';
 import { FaUsers, FaBook, FaCalendarAlt, FaSearch } from 'react-icons/fa';
 import { Input } from '@material-tailwind/react';
+import { useGetStudentsQuery } from '../student/studentApi';
 
 const DashboardPage = () => {
   const [activeTab, setActiveTab] = useState('students');
