@@ -65,7 +65,7 @@ export const studentValidationSchema = Joi.object({
 
 export const courseValidationSchema = Joi.object({
   title: Joi.string().trim().min(4).max(50).required(),
-  description: Joi.string().trim().min(20).max(150).required().messages({
+  description: Joi.string().trim().min(20).max(5000).required().messages({
     'string.min': 'Description must be at least 20 characters',
     'string.max': 'Description cannot be more than 150 characters',
     'string.empty': 'Description cannot be empty',
