@@ -20,7 +20,7 @@ const Login = () => {
         <div className='p-6 sm:p-8'>
           <div className='text-center mb-6 sm:mb-8'>
             <Avatar
-              src='../src/assets/sms-favicon.svg'
+              src='../public/sms-favicon.svg'
               className='w-16 h-16 sm:w-20 sm:h-20 mb-3 mx-auto'
             />
             <h1 className='text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2'>

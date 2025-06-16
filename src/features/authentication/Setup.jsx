@@ -17,7 +17,7 @@ const Setup = () => {
         <div className='p-8'>
           <div className='text-center mb-8'>
             <Avatar
-              src='../src/assets/sms-favicon.svg'
+              src='../public/sms-favicon.svg'
               className='w-20 h-20 mb-2.5'
             />
             <h1 className='text-3xl font-bold text-primary mb-2'>
