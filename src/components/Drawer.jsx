@@ -1,6 +1,8 @@
 import { MdDashboard } from 'react-icons/md';
 import { FaBook, FaUser } from 'react-icons/fa';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { toggleDrawer } from '../features/dashboard/dashboardSlice';
 
 const menuItems = [
   { label: 'Dashboard', href: '/dashboard', icon: <MdDashboard /> },
@@ -16,26 +18,23 @@ const menuItems = [
   },
 ];
 
-const Drawer = ({ toggleDrawer }) => {
-  return (
-    <div className='drawer-side z-20'>
-      <label
-        htmlFor='dashboard-drawer'
-        className='drawer-overlay'
-        onClick={toggleDrawer}
-      ></label>
+const Drawer = () => {
+  const dispatch = useDispatch();
 
-      <ul className='menu p-4 w-60 h-full  bg-base-100 text-base-content overflow-clip'>
-        {menuItems.map((item) => (
-          <li key={item.label} onClick={toggleDrawer}>
-            <NavItem to={item.href}>
-              {item.icon}
-              {item.label}
-            </NavItem>
-          </li>
-        ))}
-      </ul>
-    </div>
+  return (
+    <ul className='menu p-4 fixed top-14 w-60 h-full bg-base-100 text-base-content'>
+      {menuItems.map((item) => (
+        <li
+          key={item.label}
+          onClick={() => window.innerWidth < 1024 && dispatch(toggleDrawer())}
+        >
+          <NavItem to={item.href}>
+            {item.icon}
+            {item.label}
+          </NavItem>
+        </li>
+      ))}
+    </ul>
   );
 };
 
@@ -46,7 +45,7 @@ const NavItem = ({ to, children }) => {
   return (
     <Link
       to={to}
-      className={`flex items-center gap-3 text-lg mb-2 hover:text-primary ${
+      className={`flex items-center gap-3 text-lg ${
         match ? 'text-primary font-medium' : ''
       }`}
     >

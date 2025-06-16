@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Avatar, Input } from '@material-tailwind/react';
 import { useAdminLoginMutation } from './authApi';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { setAdmin } from '../admin/adminSlice';
 
@@ -15,7 +15,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className='min-h-screen mt-[-4rem] md:mt-0 flex items-center justify-center px-4 py-8 sm:px-6'>
+    <div className='min-h-screen flex items-center justify-center'>
       <div className='w-full max-w-md bg-gray-900 rounded-xl card-shadow overflow-hidden'>
         <div className='p-6 sm:p-8'>
           <div className='text-center mb-6 sm:mb-8'>
@@ -24,10 +24,10 @@ const Login = () => {
               className='w-16 h-16 sm:w-20 sm:h-20 mb-3 mx-auto'
             />
             <h1 className='text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2'>
-              Sign In
+              EnrollX
             </h1>
             <p className='text-white text-sm sm:text-base'>
-              Welcome back to EnrollX
+              Login to your account
             </p>
           </div>
 
@@ -40,9 +40,7 @@ const Login = () => {
               try {
                 const response = await adminLogin(val).unwrap();
                 dispatch(setAdmin(response));
-                console.log(val);
-                console.log(response);
-                nav('/dashboard');
+                nav('/');
                 toast.success(`Welcome ${response.fullName}`);
               } catch (err) {
                 console.error('Login Error:', err);
@@ -115,6 +113,12 @@ const Login = () => {
                   )}
                   SIGN IN
                 </button>
+                <div className='flex items-center justify-center gap-2'>
+                  <p>Don&apos;t have an account?</p>
+                  <NavLink to='/setup' className={`text-primary`}>
+                    Create Admin
+                  </NavLink>
+                </div>
               </form>
             )}
           </Formik>

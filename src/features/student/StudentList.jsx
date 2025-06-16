@@ -34,14 +34,15 @@ export function StudentList() {
     );
   }
   return (
-    <div className='px-15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10'>
+    <div className='grid dashboard-grid gap-4 max-md:place-items-center'>
       {console.log(data)}
       {data &&
         data.map(({ _id, firstName, lastName, image, course, shift }) => {
           return (
             <Card
+              onClick={() => nav(`/dashboard/students/${_id}`)}
               key={_id}
-              className=' w-59 card bg-base-100 shadow-lg card-shadow'
+              className='dashboard-card w-59 card bg-base-100 shadow-lg card-shadow cursor-pointer'
             >
               <CardHeader className=' relative h-28 m-3 overflow-hidden rounded-xl'>
                 <img
@@ -63,7 +64,7 @@ export function StudentList() {
                     color='white'
                     className=' font-light leading-normal'
                   >
-                    Course: {course.title}
+                    Course: {course?.title || 'N/A'}
                   </Typography>
                   <Typography
                     color='white'
@@ -76,7 +77,7 @@ export function StudentList() {
 
               <CardFooter className='flex px-4 pb-6 pt-0 mt-2 justify-end'>
                 <Button
-                  onClick={() => nav(`/student/${_id}`)}
+                  onClick={() => nav(`/students/${_id}`)}
                   className='rounded-md bg-slate-800 py-2 px-4 border border-slate-700 text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:scale-102 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
                 >
                   more

@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Avatar, Input } from '@material-tailwind/react';
 import { useAdminSignUPMutation } from './authApi';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 
 const Setup = () => {
   const [adminSignUP, { isLoading }] = useAdminSignUPMutation();
@@ -12,7 +12,7 @@ const Setup = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className='min-h-screen mt-[-4rem]  flex items-center justify-center'>
+    <div className='min-h-screen  flex items-center justify-center'>
       <div className='w-full max-w-md bg-gray-900 rounded-xl card-shadow overflow-hidden'>
         <div className='p-8'>
           <div className='text-center mb-8'>
@@ -21,7 +21,7 @@ const Setup = () => {
               className='w-20 h-20 mb-2.5'
             />
             <h1 className='text-3xl font-bold text-primary mb-2'>
-              Admin Setup
+              EnrollX Setup
             </h1>
             <p className='text-white'>
               Please set up your admin profile to get started
@@ -37,8 +37,8 @@ const Setup = () => {
             onSubmit={async (val) => {
               try {
                 await adminSignUP(val).unwrap();
-                toast.success('Admin created successfully');
-                nav({ replace: true }, '/login');
+                toast.success(`WELCOME TO ENROLLX ${val.fullName}`);
+                nav('/login', { replace: true });
               } catch (err) {
                 console.log('Setup Error:', err);
 
@@ -116,6 +116,12 @@ const Setup = () => {
                   )}
                   SIGN Up
                 </button>
+                <div className='flex items-center justify-center gap-2'>
+                  <p>Already have an account?</p>
+                  <NavLink to='/login' className={`text-primary`}>
+                    Login
+                  </NavLink>
+                </div>
               </form>
             )}
           </Formik>

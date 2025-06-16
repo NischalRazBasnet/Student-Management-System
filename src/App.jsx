@@ -12,49 +12,67 @@ import Login from './features/authentication/Login';
 import Setup from './features/authentication/Setup';
 import Student from './features/student/Student';
 import Course from './features/course/Course';
-
-// const checkSession = () => {
-//   return localStorage.getItem('admin') !== null;
-// };
-
-// const ProtectedRoute = ()=>{
-//   if(!checkSession()){
-//     return <Navigate to='/login' replace />
-//   }
-//   return <Outlet />
-// }
+import ProtectedRoute from './components/ProtectedRoute';
+import PublicRoute from './components/PublicRoute';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <RootLayout />,
+      element: (
+        <PublicRoute>
+          <RootLayout />
+        </PublicRoute>
+      ),
+      children: [
+        { path: 'login', element: <Login /> },
+        { path: 'setup', element: <Setup /> },
+        {
+          index: true,
+          element: <Navigate to='/dashboard' replace />,
+        },
+      ],
+    },
+    {
+      path: '/',
+      element: (
+        <ProtectedRoute>
+          <RootLayout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           path: 'dashboard',
           element: <DashboardLayout />,
           children: [
             { index: true, element: <DashboardPage /> },
-            { path: 'students', element: <StudentsPage /> },
-            { path: 'courses', element: <CoursesPage /> },
+            {
+              path: 'students',
+              children: [
+                { index: true, element: <StudentsPage /> },
+                { path: ':id', element: <Student /> },
+              ],
+            },
+            {
+              path: 'courses',
+              children: [
+                { index: true, element: <CoursesPage /> },
+                { path: ':id', element: <Course /> },
+              ],
+            },
           ],
         },
-        {
-          index: true,
-          element: <Navigate to='/dashboard' replace />,
-        },
-
-        { path: 'login', element: <Login /> },
-        { path: 'setup', element: <Setup /> },
-        { path: 'student/:id', element: <Student /> },
-        { path: 'course/:id', element: <Course /> },
       ],
+    },
+    {
+      path: '*',
+      element: <Navigate to='/dashboard' replace />,
     },
   ]);
 
   return (
     <div
-      className='max-w-[1750px]  max-h-full bg-base-200 mx-auto'
+      className='max-w-[1750px] max-h-full bg-base-200 mx-auto'
       data-theme='dark'
     >
       <RouterProvider router={router} />

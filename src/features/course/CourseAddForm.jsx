@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { useUpdateCourseMutation } from '../course/courseApi';
+import { useAddCoursesMutation } from '../course/courseApi';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 
@@ -10,24 +10,23 @@ const courseSchema = Yup.object().shape({
   description: Yup.string().required('Description is required'),
 });
 
-const CourseEditForm = ({ closeModal, course }) => {
-  const [updateCourse, { isLoading }] = useUpdateCourseMutation();
+const CourseAddForm = ({ closeModal }) => {
+  const [addCourse, { isLoading }] = useAddCoursesMutation();
 
   return (
     <Formik
       initialValues={{
-        title: course.title,
-        duration: course.duration,
-        level: course.level,
-        description: course.description,
+        title: '',
+        duration: '',
+        level: '',
+        description: '',
       }}
       onSubmit={async (val) => {
         try {
-          await updateCourse({
-            id: course._id,
+          await addCourse({
             body: val,
           }).unwrap();
-          toast.success('Course Updated Successfully!');
+          toast.success('New Course Added Successfully!');
           closeModal();
         } catch (err) {
           toast.error(err.data?.message || err.data);
@@ -131,7 +130,7 @@ const CourseEditForm = ({ closeModal, course }) => {
               className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
               disabled={isLoading}
             >
-              {isLoading ? 'Updating Course...' : 'Update Course'}{' '}
+              {isLoading ? 'Adding Course...' : 'Add Course'}
             </button>
           </div>
         </form>
@@ -140,4 +139,4 @@ const CourseEditForm = ({ closeModal, course }) => {
   );
 };
 
-export default CourseEditForm;
+export default CourseAddForm;

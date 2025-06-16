@@ -8,6 +8,7 @@ export const studentApi = mainApi.injectEndpoints({
         method: 'GET',
         params: query,
       }),
+      providesTags: ['Student'],
     }),
 
     addStudents: builder.mutation({
@@ -17,6 +18,7 @@ export const studentApi = mainApi.injectEndpoints({
         body: query.body,
         params: query,
       }),
+      invalidatesTags: ['Student'],
     }),
 
     getStudent: builder.query({
@@ -24,6 +26,7 @@ export const studentApi = mainApi.injectEndpoints({
         url: `/students/${id}`,
         method: 'GET',
       }),
+      providesTags: ['Student'],
     }),
 
     updateStudent: builder.mutation({
@@ -32,13 +35,15 @@ export const studentApi = mainApi.injectEndpoints({
         method: 'PATCH',
         body: q.body,
       }),
+      invalidatesTags: ['Student'],
     }),
 
     deleteStudent: builder.mutation({
-      query: (q) => ({
-        url: `/students/${q.id}`,
+      query: (id) => ({
+        url: `/students/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['Student'],
     }),
   }),
 });

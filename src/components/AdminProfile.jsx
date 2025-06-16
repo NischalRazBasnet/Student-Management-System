@@ -34,10 +34,13 @@ export default function ProfileMenu() {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const closeMenu = () => setIsMenuOpen(false);
 
   const { admin } = useSelector((state) => state.adminSlice);
-  console.log(admin);
+
+  const handleSignOut = () => {
+    dispatch(removeAdmin());
+    nav('/login');
+  };
 
   const initialLetter = admin.fullName
     ? admin.fullName.charAt(0).toUpperCase()
@@ -71,17 +74,12 @@ export default function ProfileMenu() {
             <MenuItem
               key={label}
               onClick={() => {
-                switch (label) {
-                  case 'Sign Out':
-                    dispatch(removeAdmin());
-                    nav('/login');
-                    break;
-
-                  case 'Profile':
-                    nav('/admin/profile');
-                    break;
+                if (label === 'Sign Out') {
+                  handleSignOut();
+                } else if (label === 'Profile') {
+                  nav('/admin/profile');
                 }
-                closeMenu();
+                setIsMenuOpen(false);
               }}
               className={`flex items-center gap-2 rounded ${
                 isLastItem

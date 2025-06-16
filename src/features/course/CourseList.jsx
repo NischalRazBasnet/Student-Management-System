@@ -1,4 +1,4 @@
-import { Button, Spinner } from '@material-tailwind/react';
+import { Button, Card, Spinner } from '@material-tailwind/react';
 import { useGetCoursesQuery } from './courseApi';
 import { useNavigate } from 'react-router';
 
@@ -24,19 +24,19 @@ const CourseList = () => {
     );
   }
   return (
-    <div className='px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+    <div className='grid course-grid gap-4 max-md:place-items-center'>
       {data &&
-        data.map(({ _id, title }) => {
-          {
-            console.log(data);
-          }
+        data.map(({ _id, title, level }) => {
           return (
-            <div key={_id} className='card bg-base-100 shadow-xl'>
-              <div className='card-body'>
-                <h2 className='card-title'>{title}</h2>
-                <p>Enrolled Students</p>
-                <div className='flex justify-between'>
-                  <div className='badge badge-primary'>20 students</div>
+            <Card
+              key={_id}
+              className=' bg-base-100 shadow-xl min-w-[250px]'
+              onClick={() => nav(`/dashboard/courses/${_id}`)}
+            >
+              <div className='card-body '>
+                <h2 className='card-title text-gray-200'>{title}</h2>
+                <p className='text-gray-500'>{level}</p>
+                <div className='flex gap-2 justify-end'>
                   <Button
                     onClick={() => nav(`/course/${_id}`)}
                     className='rounded-md bg-slate-800 py-2 px-4 border border-slate-700 text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:scale-102 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
@@ -45,7 +45,7 @@ const CourseList = () => {
                   </Button>
                 </div>
               </div>
-            </div>
+            </Card>
           );
         })}
     </div>

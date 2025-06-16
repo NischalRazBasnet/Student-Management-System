@@ -7,6 +7,7 @@ export const courseApi = mainApi.injectEndpoints({
         url: '/courses',
         method: 'GET',
       }),
+      providesTags: ['Course'],
     }),
     addCourses: builder.mutation({
       query: (query) => ({
@@ -14,27 +15,30 @@ export const courseApi = mainApi.injectEndpoints({
         method: 'POST',
         body: query.body,
       }),
+      invalidatesTags: ['Course'],
     }),
     getCourse: builder.query({
       query: (id) => ({
         url: `/courses/${id}`,
         method: 'GET',
       }),
-
-      updateCourse: builder.mutation({
-        query: (q) => ({
-          url: `/courses/${q.id}`,
-          method: 'PATCH',
-          body: q.body,
-        }),
+      providesTags: ['Course'],
+    }),
+    updateCourse: builder.mutation({
+      query: (q) => ({
+        url: `/courses/${q.id}`,
+        method: 'PATCH',
+        body: q.body,
       }),
+      invalidatesTags: ['Course'],
+    }),
 
-      deleteCourse: builder.mutation({
-        query: (id) => ({
-          url: `/courses/${id}`,
-          method: 'DELETE',
-        }),
+    deleteCourse: builder.mutation({
+      query: (id) => ({
+        url: `/courses/${id}`,
+        method: 'DELETE',
       }),
+      invalidatesTags: ['Course'],
     }),
   }),
 });
