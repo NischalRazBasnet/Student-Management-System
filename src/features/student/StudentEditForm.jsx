@@ -1,10 +1,10 @@
 import { Formik } from 'formik';
-import { useUpdateStudentMutation } from './Student';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useGetCoursesQuery } from '../course/courseApi';
 import { useSelector } from 'react-redux';
 import { baseUrl } from '../../app/mainApi';
+import { useUpdateStudentMutation } from './apiStudent';
 
 const studentSchema = Yup.object().shape({
   firstName: Yup.string().required('First Name is required'),

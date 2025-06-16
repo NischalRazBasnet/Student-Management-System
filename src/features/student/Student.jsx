@@ -1,5 +1,4 @@
 import { useParams, Link } from 'react-router-dom';
-import { useGetStudentQuery } from './Student';
 import { baseUrl } from '../../app/mainApi';
 import {
   FaEdit,
@@ -18,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, openModal } from '../modal/modalSlice';
 import StudentEditForm from './StudentEditForm';
 import DeleteButton from '../../components/DeleteButton';
+import { useGetStudentQuery } from './apiStudent';
 
 const Student = () => {
   const { id } = useParams();

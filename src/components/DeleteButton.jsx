@@ -2,7 +2,7 @@ import { useDeleteCourseMutation } from '../features/course/courseApi';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import { FaTrash } from 'react-icons/fa';
-import { useDeleteStudentMutation } from '../features/student/Student';
+import { useDeleteStudentMutation } from '../features/student/apiStudent';
 
 const DeleteButton = ({ id, type }) => {
   const nav = useNavigate();
