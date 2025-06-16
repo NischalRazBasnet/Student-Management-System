@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { mainApi } from './MainApi';
 import { adminSlice } from '../features/admin/adminSlice';
 import { modalSlice } from '../features/modal/modalSlice';
 import dashboardReducer from '../features/dashboard/dashboardSlice';
+import { mainApi } from './mainApi';
 
 export const store = configureStore({
   reducer: {

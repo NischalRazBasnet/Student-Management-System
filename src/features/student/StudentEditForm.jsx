@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useGetCoursesQuery } from '../course/courseApi';
 import { useSelector } from 'react-redux';
-import { baseUrl } from '../../app/MainApi';
+import { baseUrl } from '../../app/mainApi';
 
 const studentSchema = Yup.object().shape({
   firstName: Yup.string().required('First Name is required'),

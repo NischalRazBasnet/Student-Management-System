@@ -8,7 +8,7 @@ import {
   Spinner,
 } from '@material-tailwind/react';
 import { useGetStudentsQuery } from './studentApi';
-import { baseUrl } from '../../app/MainApi';
+import { baseUrl } from '../../app/mainApi';
 import { useNavigate } from 'react-router';
 
 export function StudentList() {

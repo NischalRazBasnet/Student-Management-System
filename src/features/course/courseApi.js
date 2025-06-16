@@ -1,4 +1,4 @@
-import { mainApi } from '../../app/MainApi';
+import { mainApi } from '../../app/mainApi';
 
 export const courseApi = mainApi.injectEndpoints({
   endpoints: (builder) => ({

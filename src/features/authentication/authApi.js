@@ -1,4 +1,4 @@
-import { mainApi } from '../../app/MainApi';
+import { mainApi } from '../../app/mainApi';
 
 export const authApi = mainApi.injectEndpoints({
   endpoints: (builder) => ({
