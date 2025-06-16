@@ -1,6 +1,6 @@
 import { mainApi } from '../../app/mainApi';
 
-export const studentApi = mainApi.injectEndpoints({
+export const apiStudent = mainApi.injectEndpoints({
   endpoints: (builder) => ({
     getStudents: builder.query({
       query: (query) => ({
@@ -54,4 +54,4 @@ export const {
   useGetStudentQuery,
   useUpdateStudentMutation,
   useDeleteStudentMutation,
-} = studentApi;
+} = apiStudent;

@@ -7,7 +7,7 @@ import {
   Button,
   Spinner,
 } from '@material-tailwind/react';
-import { useGetStudentsQuery } from './studentApi';
+import { useGetStudentsQuery } from './apiStudent';
 import { baseUrl } from '../../app/mainApi';
 import { useNavigate } from 'react-router';
 
