@@ -27,7 +27,11 @@ app.use(
 app.use(express.static('uploads'));
 //DATABASE CONNECTION
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000,
+  })
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log(
@@ -36,7 +40,8 @@ mongoose
     });
   })
   .catch((err) => {
-    console.log(err);
+    console.error('Database connection failed:', err.message);
+    process.exit(1);
   });
 
 app.get('/', (req, res) => {
