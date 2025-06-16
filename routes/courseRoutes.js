@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { notAllowed } from '../utils/notAllowed.js';
-import { findCourseID } from '../middlewares/checkById.js';
+import { findCourseID } from '../middlewares/checkByID.js';
 import {
   addCourse,
   deleteCourse,

@@ -15,7 +15,7 @@ import {
   validates,
 } from '../utils/validationSchemas.js';
 import { notAllowed } from '../utils/notAllowed.js';
-import { findStudentID } from '../middlewares/checkById.js';
+import { findStudentID } from '../middlewares/checkByID.js';
 import { verifyToken } from '../middlewares/verifyToken.js';
 
 const router = Router();
