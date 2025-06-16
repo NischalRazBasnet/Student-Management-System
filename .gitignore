@@ -1,11 +1,7 @@
 # dependencies
 /node_modules
 
-#Ignore all files in uploads
-/uploads/*
 
-#But keep the .gitkeep file
-!/uploads/.gitkeep
 
 # production
 /dist
