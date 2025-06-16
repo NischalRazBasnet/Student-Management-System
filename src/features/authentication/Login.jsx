@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Formik } from 'formik';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaGraduationCap } from 'react-icons/fa';
 import { Avatar, Input } from '@material-tailwind/react';
 import { useAdminLoginMutation } from './authApi';
 import toast from 'react-hot-toast';
