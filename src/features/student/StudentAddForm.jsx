@@ -1,8 +1,8 @@
 import { Formik } from 'formik';
-import { useAddStudentsMutation } from './Student';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useGetCoursesQuery } from '../course/courseApi';
+import { useAddStudentsMutation } from './apiStudent';
 
 const studentSchema = Yup.object().shape({
   firstName: Yup.string().required('First Name is required'),
