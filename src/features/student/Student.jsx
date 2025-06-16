@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useGetStudentQuery } from './studentApi';
+import { useGetStudentQuery } from './Student';
 import { baseUrl } from '../../app/mainApi';
 import {
   FaEdit,

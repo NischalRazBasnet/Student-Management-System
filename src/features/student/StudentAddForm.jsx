@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { useAddStudentsMutation } from './studentApi';
+import { useAddStudentsMutation } from './Student';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useGetCoursesQuery } from '../course/courseApi';

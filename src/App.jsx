@@ -10,10 +10,10 @@ import StudentsPage from './features/student/StudentsPage';
 import CoursesPage from './features/course/CoursesPage';
 import Login from './features/authentication/Login';
 import Setup from './features/authentication/Setup';
-import Student from './features/student/Student';
 import Course from './features/course/Course';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
+import Student from './features/student/Student';
 
 function App() {
   const router = createBrowserRouter([
